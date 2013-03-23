@@ -52,11 +52,21 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
+static const char *slockcmd[] = { "slock", NULL };
+static const char *scrotcmd[] = { "scrot", "-e", "mv $f ~/Screenshots/ 2>/dev/null", NULL };
+static const char *volumedown[] = { "amixer", "-q", "set", "Master", "2%-", "umute", NULL };
+static const char *volumeup[] = { "amixer", "-q", "set", "Master", "2%+", "umute", NULL };
+static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
+	{ MODKEY,                       XK_s,      spawn,          {.v = scrotcmd } },
+	{ MODKEY,                       XK_Down,   spawn,          {.v = volumedown } },
+	{ MODKEY,                       XK_Up,     spawn,          {.v = volumeup } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mute } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
